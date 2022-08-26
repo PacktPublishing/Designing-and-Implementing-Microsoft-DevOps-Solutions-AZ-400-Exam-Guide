@@ -1,0 +1,61 @@
+parameters:
+- name: buildConfiguration
+  type: string
+  default: 'Release'
+- name: pool
+  type: string
+  default: 'ubuntu-latest'
+
+#Definition of Jobs to be run
+jobs:
+- job: 'buildJob'
+  steps:
+  # Restore Nugget Packages
+  - task: DotNetCoreCLI@2 
+    displayName: Restore
+    inputs:
+      command: restore
+      projects: '**/*.csproj'
+      feedsToUse: config
+      nugetConfigPath: $(Build.SourcesDirectory)/nugget.config
+  # Run the build
+  - task: DotNetCoreCLI@2 
+    displayName: Build
+    inputs:
+      command: build
+      projects: '**/*.csproj'
+      arguments: '--configuration ${{ parameters.buildConfiguration }}' # Update this to match your need
+  
+  # Run your tests
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Tests'
+    inputs:
+      command: test
+      projects: '**/*Tests/*.csproj'
+      arguments: '--configuration ${{ parameters.buildConfiguration }}'
+
+  # Publish projects to specified folder.
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish'
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      projects: '**/*.csproj'
+      arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+      zipAfterPublish: true
+      modifyOutputPath: true
+
+
+
+  #- task: CopyFiles@2
+  #inputs:
+  #  SourceFolder: '$(build.sourcesdirectory)/PartsUnlimited-aspnet45/env/'
+  #  Contents: '**/*.json'
+  #  TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'publish pipeline artifacts'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifact: 'drop'
+      publishLocation: 'pipeline'

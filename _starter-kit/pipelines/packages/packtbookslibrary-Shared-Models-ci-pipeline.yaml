@@ -1,0 +1,47 @@
+# pipeline variables
+
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  projectName: 'packtbookslibrary.Models'
+  buildConfiguration: 'Release'
+  major: 2
+  minor: 0
+  patch: $[counter(variables['minor'], 0)] #this will reset when we bump minor
+  NugetVersion: $(major).$(minor).$(patch)
+  
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk 6.0.x'
+  inputs:
+    version: 6.0.x
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '_starter-kit/source/packtbookslibrary.Models/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '_starter-kit/source/packtbookslibrary.Models/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    packagesToPack: '_starter-kit/source/packtbookslibrary.Models/*.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'NugetVersion'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet push'
+  inputs:
+    command: push
+    publishVstsFeed: 'e41c2a57-7e74-447a-b0de-1c0cc3e774e7/60bdfc13-e89b-460b-82ee-1ad66350b73b'

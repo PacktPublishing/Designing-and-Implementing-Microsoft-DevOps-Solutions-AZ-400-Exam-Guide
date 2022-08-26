@@ -1,0 +1,43 @@
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: build
+  jobs:
+  - template: build/template.yaml
+
+- stage: DeployDevStage
+  variables:
+  - group: Development
+  jobs:
+    - template: deploy/template.yaml
+      parameters:
+        azureSubscription: 'Azure Service Connection'
+        webappname: 'packtbookstoreapi'
+        resourcegroup: 'az400-dev' 
+        slotname: 'dev'
+
+- stage: DeployTSTStage
+  variables:
+  - group: Test
+  jobs:
+    - template: deploy/template.yaml
+      parameters:
+        azureSubscription: 'Azure Service Connection'
+        webappname: 'packtbookstoreapi'
+        resourcegroup: 'az400-dev' 
+        slotname: 'tst'
+
+- stage: DeployProdStage
+  variables:
+  - group: Production
+  jobs:
+    - template: deploy/template.yaml
+      parameters:
+        azureSubscription: 'Azure Service Connection'
+        webappname: 'packtbookstoreapi'
+        resourcegroup: 'az400-dev' 
+        slotname: 'prd'

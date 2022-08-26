@@ -1,0 +1,29 @@
+parameters:
+- name: azureSubscription
+  type: string
+- name: webappname
+  type: string
+- name: resourcegroup
+  type: string
+- name: slotname
+  type: string
+
+jobs:
+- job: deployJob
+  steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildtype: "current"
+      artifactname: "drop"
+      downloadpath: "$(build.sourcesdirectory)"
+
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: 'AzureRM'
+      azureSubscription: ${{ parameters.azureSubscription }}
+      appType: 'webApp'
+      WebAppName: ${{ parameters.webappname }}
+      deployToSlotOrASE: true
+      ResourceGroupName: ${{ parameters.resourcegroup }}
+      SlotName: ${{ parameters.slotname }}
+      packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'

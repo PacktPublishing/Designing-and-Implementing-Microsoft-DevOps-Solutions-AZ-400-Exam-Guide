@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "1234",
+    "ISBNNumber": "",
+    "Title": "Designing API First Archtiecture",
+    "Description": "Book on API Architecture",
+    "Author": "public",
+    "AuthorName": "Subhajit"
+  },
+  {
+    "Id": "12345",
+    "ISBNNumber": "",
+    "Title": "C# 10 and .NET 6 – Modern Cross-Platform Development - Sixth Edition",
+    "Description": "C# 10 and .NET 6 – Modern Cross-Platform Development - Sixth Edition",
+    "Author": "public",
+    "AuthorName": "Mark J. Price"
+  }
+
+]
