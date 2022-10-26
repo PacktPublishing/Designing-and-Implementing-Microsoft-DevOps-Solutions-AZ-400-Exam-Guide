@@ -82,3 +82,7 @@ He  is a Solution Architect, Development Consultant, and a Trusted Technology Ad
 **Maik van der Gaag**
 He is an architect and trainer at 3fifty, an experienced consultancy company with a strong focus on the Microsoft cloud. He has over 15 years' experience of providing architecture, development, training, and design expertise. During his career, he has worked on a variety of projects, ranging from cloud transformations to DevOps implementations.
 He loves to share his knowledge, which was also one of the reasons why he founded the Dutch Cloud meetup. Maik is a public speaker, writes blogs, and organizes events.
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781803240664">https://packt.link/free-ebook/9781803240664 </a> </p>
