@@ -1,3 +1,15 @@
+
+### Get this product for $5
+
+<i>Packt is having its biggest sale of the year. Get this eBook or any other book, video, or course that you like just for $5 each</i>
+
+
+<b><p align='center'>[Buy now](https://packt.link/9781803240664)</p></b>
+
+
+<b><p align='center'>[Buy similar titles for just $5](https://subscription.packtpub.com/search)</p></b>
+
+
 # Designing and Implementing Microsoft DevOps Solutions AZ-400 Exam Guide
 
 <a href="https://www.packtpub.com/product/designing-and-implementing-microsoft-devops-solutions-az-400-exam-guide-second-edition/9781803240664"><img src="https://images-na.ssl-images-amazon.com/images/I/51p9hr-HCeL._SX404_BO1,204,203,200_.jpg" alt="Book Name" height="256px" align="right"></a>
